@@ -11,3 +11,5 @@ I decided to make a document to plan out everything that I needed for each funct
 After all of that, I spent a good weekend rewriting the stuff I have written in the previous 
 attempt and also writing the new code that I had not written yet. 
 I enjoyed the challenge of writing the biggest of my own programs yet while keeping it organized. 
+
+I have also added a version for Windows OS that clears the screen when it reprints the menu for better formatting
