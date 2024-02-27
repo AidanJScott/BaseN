@@ -12,6 +12,7 @@ HEX_TO_RGB = "4"
 REPRINT_MENU = "R"
 EXIT_FUNCTION = "E"
 OPTION_LIST = ["1","2","3","4","R","E"]
+WINDOWS_CLEAR = 'cls'
 MENU_DEC_TO_BASE_N = "1. Convert a decimal number to another base."
 MENU_BASE_N_TO_DEC = "2. Covert a number from any base to a decimal number."
 MENU_SIGN_BIN = "3. Sign a binary number using two's compliment (one byte limit)."
@@ -127,7 +128,7 @@ def main():
                 hexToRGB()
 
             elif userInput.upper() == REPRINT_MENU:
-                os.system('cls')
+                os.system(WINDOWS_CLEAR)
                 printMenu()
                 #variable allows for yes or no prompt to not be printed
                 promptAgain = False
