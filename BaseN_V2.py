@@ -26,7 +26,7 @@ BYTE_LENGTH = 8
 
 #global constants for general messages
 EMPTY_LINE = ""
-CONTINUE_PROMPT = "Would you like to select another option?/nEnter 'yes' or 'no': "
+CONTINUE_PROMPT = "Would you like to select another option?\nEnter 'yes' or 'no': "
 CONTINUE = "YES"
 DO_NOT_CONTINUE = "NO"
 MENU_PROMPT = "Select an option ('1','2','R',etc.): "
