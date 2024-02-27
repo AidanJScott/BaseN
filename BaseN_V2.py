@@ -12,9 +12,41 @@ HEX_TO_RGB = "4"
 REPRINT_MENU = "R"
 EXIT_FUNCTION = "E"
 OPTION_LIST = ["1","2","3","4","R","E"]
+MENU_DEC_TO_BASE_N = "1. Convert a decimal number to another base."
+MENU_BASE_N_TO_DEC = "2. Covert a number from any base to a decimal number."
+MENU_SIGN_BIN = "3. Sign a binary number using two's compliment (one byte limit)."
+MENU_HEX_TO_RGB = "4. Convert a color hexidecimal code to its RGB values."
+MENU_REPRINT_MENU = "Enter 'R' to clear the screen and reprint the menu"
+MENU_EXIT_FUNCTION = "Enter 'E' to exit the program."
+
+#global constants for base values
 BINARY_BASE = 2
 HEX_BASE = 16
 BYTE_LENGTH = 8
+
+#global constants for general messages
+EMPTY_LINE = ""
+CONTINUE_PROMPT = "Would you like to select another option?/nEnter 'yes' or 'no': "
+CONTINUE = "YES"
+DO_NOT_CONTINUE = "NO"
+MENU_PROMPT = "Select an option ('1','2','R',etc.): "
+DECIMAL_INPUT = "Please enter a decimal number using digits 0-9 (no decimals): "
+BASE_INPUT = "Enter a base value from 2-36: "
+CAPITAL_MESSAGE = "*Use capital letters for alphabetical characters*"
+SIGN_DECIMAL_INPUT = "Please enter a decimal number using digits 0-9 (no decimals) from -128 to 127: "
+HEX_INPUT = "Please enter a six-digit hex color value: #"
+
+#global constants for error messages
+ERROR_CONTINUE_PROMPT = "***Error: Please enter either 'yes' or 'no'***"
+ERROR_MENU_PROMPT = "***Error: Invalid menu choice***"
+ERROR_SIGN_DECIMAL = "***Error: Value must be between -128 and 127***"
+ERROR_HEX_DIGIT = "***Error: value must contain six digits***"
+ERROR_DEC_DIGITS = "***Error: Please use only digits 0-9***"
+ERROR_BASE_VALUE = "***Error: Please use only base 2-36***"
+ERROR_CHARACTER_VALUE = "***Error: Characters outside of the base character set were used***"
+
+
+
 
 
 def main():
@@ -38,28 +70,27 @@ def main():
             #validation loop for choosing to continue
             while (not validChoice):
 
-                print("\nWould you like to select another option?")
-                menuChoice = input("Enter 'yes' or 'no': ")
+                print(EMPTY_LINE)
+                menuChoice = input(CONTINUE_PROMPT)
 
                 #reprint menu if user chooses 'yes'
-                if menuChoice.upper() == "YES":
+                if menuChoice.upper() == CONTINUE:
                     validChoice = True
 
-                    print()
+                    print(EMPTY_LINE)
                     printMenu()
 
                 #exit function if user chooses 'no'
-                elif menuChoice.upper() == "NO":
+                elif menuChoice.upper() == DO_NOT_CONTINUE:
                     validChoice = True
 
                     userInput = EXIT_FUNCTION
                     exitFunction = True
 
                 else:
-                    print("\n***Error: Please enter either 'yes' or 'no'***")
+                    print("\n", ERROR_CONTINUE_PROMPT, sep="")
                     validChoice = False
             
-
         menuCount += 1
 
         if userInput != EXIT_FUNCTION:
@@ -69,11 +100,13 @@ def main():
 
             #validation loop for user choice
             while (not validInput):
-                userInput = input("\nSelect an option ('1','2','R',etc.): ")
+                print(EMPTY_LINE)
+                userInput = input(MENU_PROMPT)
                 validInput = validMenuChoice(userInput)
 
                 if (not validInput):
-                    print("\n***Error: Invalid menu choice***")
+                    print(EMPTY_LINE)
+                    print(ERROR_MENU_PROMPT)
 
             #Compare with constants to select the correct menu option
             if userInput == DEC_TO_BASE_N:
@@ -89,8 +122,9 @@ def main():
                 hexToRGB()
 
             elif userInput.upper() == REPRINT_MENU:
-                print()
+                print(EMPTY_LINE)
                 printMenu()
+
 
             elif userInput.upper() == EXIT_FUNCTION:
                 exitFunction = True
@@ -105,15 +139,15 @@ def decToBaseN():
 
     #input validation loop checks if an integer is entered
     while (not validUserDec):
-
-        userDec = input("\nPlease enter a decimal number using digits 0-9 (no decimals): ")
+        print(EMPTY_LINE)
+        userDec = input(DECIMAL_INPUT)
 
         validUserDec = validDecimalNum(userDec)
 
     #input validation loop checks if the base entered is valid
     while (not validUserBase):
         
-        base = input("Enter a base value from 2-36: ")
+        base = input(BASE_INPUT)
 
         #send to error checking function
         validUserBase = validBase(base)
@@ -147,7 +181,8 @@ def baseNToDec():
 
     #input validation loop checks if the base entered is valid
     while (not validUserBase):
-        base = input("\nEnter a base value from 2-36: ")
+        print(EMPTY_LINE)
+        base = input(BASE_INPUT)
         
         #send to error checking function
         validUserBase = validBase(base)
@@ -156,7 +191,7 @@ def baseNToDec():
     base = int(base)
 
     if base >= 16:
-            print("\n*Use capital letters for alphabetical characters*")
+            print("\n", CAPITAL_MESSAGE, sep="")
 
     while (not validUserNum):
         userNum = input(f"Please enter a number in base-{base} form: ")
@@ -185,7 +220,8 @@ def signBinary():
     #input validation loop checks if an integer is entered
     while (not validUserDec):
 
-        userDec = input("\nPlease enter a decimal number using digits 0-9 (no decimals) from -128 to 127: ")
+        print(EMPTY_LINE)
+        userDec = input(SIGN_DECIMAL_INPUT)
         originalDec = userDec
 
         #remove negative and store if it existed
@@ -200,7 +236,7 @@ def signBinary():
             #check if user input is in the range of a signed bit
             if not((int(userDec) >= -128) and (int(userDec) <= 127)):
                 validUserDec = False
-                print("\n***Error: Value must be between -128 and 127***")
+                print("\n", ERROR_SIGN_DECIMAL, sep="")
 
     #convert to integer for calculations
     userDec = int(userDec)
@@ -254,12 +290,12 @@ def hexToRGB():
 
     #validation loop for length and characters used
     while (not validUserHex):
-        print("\n*Use capital letters for non-numeric digits*")
-        hexValue = input("Please enter a six-digit hex color value: #")
+        print("\n", CAPITAL_MESSAGE, sep="")
+        hexValue = input(HEX_INPUT)
         validUserHex = validBaseNum(hexValue, base)
 
         if len(hexValue) != 6:
-            print(f"\n***Error: value must contain six digits***\n")
+            print("\n", ERROR_HEX_DIGIT, "\n", sep="")
             validUserHex = False
 
     #convert to a list for function loops
@@ -394,13 +430,13 @@ def listToString(inputList):
 #function prints out the main menu
 def printMenu():
     
-    print("1. Convert a decimal number to another base.")
-    print("2. Covert a number from any base to a decimal number.")
-    print("3. Sign a binary number using two's compliment.")
-    print("4. Convert a color hexidecimal code to its RGB values.")
+    print(MENU_DEC_TO_BASE_N)
+    print(MENU_BASE_N_TO_DEC)
+    print(MENU_SIGN_BIN)
+    print(MENU_HEX_TO_RGB)
 
-    print("\nEnter 'R' to reprint the menu")
-    print("Enter 'E' to exit the program.")
+    print("\n", MENU_REPRINT_MENU, sep="")
+    print(MENU_EXIT_FUNCTION)
 
     return
 
@@ -424,7 +460,7 @@ def validDecimalNum(userDec):
 
     #print error message if other characters are included
     if (not decValid):
-        print("\n***Error: Please use only digits 0-9***")
+        print("\n", ERROR_DEC_DIGITS, sep="")
 
     else:
         decValid = True
@@ -447,7 +483,7 @@ def validBase(base):
 
     #print error message if other characters are included or base is out of range
     else:
-        print("\n***Error: Please use only base 2-36***\n")
+        print("\n", ERROR_BASE_VALUE, "\n", sep="")
         validUserBase = False      
 
     return validUserBase
@@ -488,7 +524,7 @@ def validBaseNum(userNum, base):
     #print error message if any are found
     else:
         validUserNum = False
-        print("\n***Error: Characters outside of the base character set were used***\n")
+        print("\n", ERROR_CHARACTER_VALUE, "\n", sep="")
 
     return validUserNum
 
