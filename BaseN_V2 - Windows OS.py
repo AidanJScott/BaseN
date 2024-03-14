@@ -4,15 +4,14 @@ Not everything is necessarily the most efficient, in fact, I will often take a
 longer route to show the by-hand method as a restriction for myself.
 '''
 
-#global constants (Main Menu)
-DEC_TO_BASE_N = "1"
-BASE_N_TO_DEC = "2"
-SIGN_BIN = "3"
-HEX_TO_RGB = "4"
-REPRINT_MENU = "R"
-EXIT_FUNCTION = "E"
+#global constants: Main Menu
+DEC_TO_BASE_N = '1'
+BASE_N_TO_DEC = '2'
+SIGN_BIN = '3'
+HEX_TO_RGB = '4'
+REPRINT_MENU = 'R'
+EXIT_FUNCTION = 'E'
 OPTION_LIST = ["1","2","3","4","R","E"]
-WINDOWS_CLEAR = 'cls'
 MENU_DEC_TO_BASE_N = "1. Convert a decimal number to another base."
 MENU_BASE_N_TO_DEC = "2. Covert a number from any base to a decimal number."
 MENU_SIGN_BIN = "3. Sign a binary number using two's compliment (one byte limit)."
@@ -20,12 +19,12 @@ MENU_HEX_TO_RGB = "4. Convert a color hexidecimal code to its RGB values."
 MENU_REPRINT_MENU = "Enter 'R' to clear the screen and reprint the menu"
 MENU_EXIT_FUNCTION = "Enter 'E' to exit the program."
 
-#global constants for base values
+#global constants: base values
 BINARY_BASE = 2
 HEX_BASE = 16
 BYTE_LENGTH = 8
 
-#global constants for general messages
+#global constants: misc. messages
 EMPTY_LINE = ""
 CONTINUE_PROMPT = "Would you like to select another option?\nEnter 'yes' or 'no': "
 CONTINUE = "YES"
@@ -36,8 +35,9 @@ BASE_INPUT = "Enter a base value from 2-36: "
 CAPITAL_MESSAGE = "*Use capital letters for alphabetical characters*"
 SIGN_DECIMAL_INPUT = "Please enter a decimal number using digits 0-9 (no decimals) from -128 to 127: "
 HEX_INPUT = "Please enter a six-digit hex color value: #"
+WINDOWS_CLEAR_SCREEN = 'cls'
 
-#global constants for error messages
+#global constants: error messages
 ERROR_CONTINUE_PROMPT = "***Error: Please enter either 'yes' or 'no'***"
 ERROR_MENU_PROMPT = "***Error: Invalid menu choice***"
 ERROR_SIGN_DECIMAL = "***Error: Value must be between -128 and 127***"
@@ -128,7 +128,7 @@ def main():
                 hexToRGB()
 
             elif userInput.upper() == REPRINT_MENU:
-                os.system(WINDOWS_CLEAR)
+                os.system(WINDOWS_CLEAR_SCREEN)
                 printMenu()
                 #variable allows for yes or no prompt to not be printed
                 promptAgain = False
